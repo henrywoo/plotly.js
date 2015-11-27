@@ -22,8 +22,16 @@ var touch = function(fileName) {
     fs.closeSync(fs.openSync(fileName, 'w'));
 };
 
-// restart nw1 then test
-exec('monit restart nw1 && sleep 5', function() {
+
+// restart nw1, wait for it to do that, then test
+exec('monit restart nw1 && sleep 10', function() {
+    var notOkToStart = true;
+
+    var monit = spawn('monit', ['summary']);
+    monit.stdout.on('data', function(data) {
+        console.log(data.toString().split('\n')[3])
+    });
+
     if(!userFileName) runAll();
     else runSingle(userFileName);
 });
@@ -100,12 +108,6 @@ function testMock (fileName, t) {
 
         t.ok(isEqual, imageFileName + ' should be pixel perfect');
     }
-
-    console.log('before request')
-    var ps = spawn('ps aux | grep nw');
-    ps.on('data', function(data) {
-        console.log(data);
-    });
 
     request(options)
         .pipe(savedImageStream)
