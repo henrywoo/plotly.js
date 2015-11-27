@@ -2,6 +2,7 @@
 
 Test plotly.js with the Plotly Image-Server docker container.
 
+
 ### Run the container
 
 Inside your `plotly.js` directory, run
@@ -70,10 +71,23 @@ docker images
 docker ps -a
 ```
 
+whereas `docker ps` lists only the started containers.
+
 ### Stop container
 
 ```bash
 docker stop [container_id]
+```
+
+### Start an existing container
+
+`docker stop` does not delete the reference to the plotly/imageserver container
+that you have `docker run`. To start an existing container, get its id using
+`docker ps -a` and then
+
+
+```bash
+docker start [container_id]
 ```
 
 ### Remove container
@@ -82,4 +96,4 @@ docker stop [container_id]
 docker rm [container_id]
 ```
 
-For more comprehensive information about docker, please refer to [docker document](http://docs.docker.com/)
+For more comprehensive information about docker, please refer to [docker docs](http://docs.docker.com/)
