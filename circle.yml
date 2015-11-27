@@ -16,7 +16,7 @@ dependencies:
   post:
     - npm run cibuild
     - docker run -d --name myimageserver -v $PWD:/var/www/streambed/image_server/plotly.js -p 9010:9010 plotly/imageserver:1.0.0;
-    - sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' myimageserver)" -- bash -c "touch /etc/plotly_global_vars.sh && /usr/local/bin/nw-wrapper.sh kill nw1 && /usr/local/bin/nw-wrapper.sh start nw1"; sleep 10
+    - sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' myimageserver)" -- bash -c "pkill nw"; sleep 5
 
 test:
   override:
