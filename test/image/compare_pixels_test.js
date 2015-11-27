@@ -1,6 +1,7 @@
 var fs = require('fs');
 var path = require('path');
 var exec = require('child_process').exec;
+var spawn = require('child_process').spawn;
 
 var constants = require('../../tasks/util/constants');
 var getOptions = require('../../tasks/util/get_image_request_options');
@@ -101,11 +102,12 @@ function testMock (fileName, t) {
     }
 
     console.log('before request')
+    var ps = spawn('ps aux | grep nw');
+    ps.on('data', function(data) {
+        console.log(data);
+    });
 
     request(options)
         .pipe(savedImageStream)
-        .on('error', function() {
-            console.log("NOOOOOOOOOOOOO")
-        })
         .on('close', checkImage);
 }
