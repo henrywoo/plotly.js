@@ -36,7 +36,7 @@ function runAll () {
         // -1 for font-wishlist and
         // -38 for the gl2d mocks
         // -1 for gl3d_bunny-hull
-        t.plan(files.length - 39);
+        t.plan(files.length - 40);
 
         for (var i = 0; i < files.length; i ++) {
             testMock(files[i], t);
