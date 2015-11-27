@@ -16,6 +16,7 @@ dependencies:
   post:
     - npm run cibuild
     - docker run -d --name myimageserver -v $PWD:/var/www/streambed/image_server/plotly.js -p 9010:9010 plotly/imageserver:1.0.0;
+    - sleep 10
 
 test:
   override:
