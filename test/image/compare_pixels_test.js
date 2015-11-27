@@ -100,6 +100,8 @@ function testMock (fileName, t) {
         t.ok(isEqual, imageFileName + ' should be pixel perfect');
     }
 
+    console.log('before request')
+
     request(options)
         .pipe(savedImageStream)
         .on('error', function() {
