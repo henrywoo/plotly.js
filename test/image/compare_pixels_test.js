@@ -115,4 +115,7 @@ function testMock (fileName, t) {
         })
         .pipe(savedImageStream)
         .on('close', checkImage);
+        .on('error', function() {
+            console.log("NOOOOOOOOOOOOO")
+        })
 }
