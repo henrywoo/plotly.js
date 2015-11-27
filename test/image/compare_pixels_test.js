@@ -1,5 +1,6 @@
 var fs = require('fs');
 var path = require('path');
+var exec = require('child_process').exec;
 
 var constants = require('../../tasks/util/constants');
 var getOptions = require('../../tasks/util/get_image_request_options');
@@ -20,8 +21,11 @@ var touch = function(fileName) {
     fs.closeSync(fs.openSync(fileName, 'w'));
 };
 
-if (!userFileName) runAll();
-else runSingle(userFileName);
+// restart nw1 then test
+exec('monit restart nw1 && sleep 5', function() {
+    if(!userFileName) runAll();
+    else runSingle(userFileName);
+});
 
 function runAll () {
     test('testing mocks', function (t) {

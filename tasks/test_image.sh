@@ -23,8 +23,6 @@ IMAGE_VERSION="1.0.0"
 CMD=(
     "cd /var/www/streambed/image_server/plotly.js &&"
     "cp -f test/image/index.html ../server_app/index.html &&"
-    "monit restart nw1 &&"
-    "sleep 5 &&"
     "node test/image/compare_pixels_test.js $1"
 )
 
