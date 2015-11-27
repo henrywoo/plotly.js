@@ -24,12 +24,13 @@ var touch = function(fileName) {
 
 
 // restart nw1, wait for it to do that, then test
+console.error('restarting nw ...');
 exec('monit restart nw1 && sleep 10', function() {
     var notOkToStart = true;
 
     var monit = spawn('monit', ['summary']);
     monit.stdout.on('data', function(data) {
-        console.log(data.toString().split('\n')[3])
+        console.error(data.toString().split('\n')[3])
     });
 
     if(!userFileName) runAll();
